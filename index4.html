@@ -1,0 +1,123 @@
+
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><!--   w w   w . d   e   m  o 2   s . c  o   m -->
+  <body>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <!-- <script src="https://threejs.org/build/three.js"></script> -->
+  <script>
+
+        AFRAME.registerComponent('modify-materials',{   
+        schema : { speed : {default:1}},
+        init : function(){
+          this.ifMouseDown = true;
+          this.x_cord = 0;
+          // this.y_cord = 0;
+          document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
+          document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
+          document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+        },
+        OnDocumentMouseDown : function(event){
+          this.ifMouseDown = true;
+          this.x_cord = event.clientX;
+          // this.y_cord = event.clientY;
+        },
+        OnDocumentMouseUp : function(){
+          this.ifMouseDown = false;
+        },
+        OnDocumentMouseMove : function(event)
+        {
+          if(this.ifMouseDown)
+          {
+            var temp_x = event.clientX-this.x_cord;
+            // var temp_y = event.clientY-this.y_cord;
+            if(Math.abs(temp_x))
+            {
+              this.el.object3D.rotateY(temp_x*this.data.speed/100);
+            }
+            // else
+            // {
+            //   this.el.object3D.rotateX(temp_y*this.data.speed/100);
+            // }
+            this.x_cord = event.clientX;
+            // this.y_cord = event.clientY;
+          }
+        }
+        
+      });
+    
+   
+  </script>
+  <script>
+    AFRAME.registerComponent("weblink", {
+      schema: {
+        url: {
+          default: ""
+        }
+      },
+      init: function() {
+        this.el.addEventListener("click", (e) => {
+          window.location = this.data.url;
+        })
+      }
+    })
+  
+  </script>
+  
+  <a-scene cursor="rayOrigin: mouse" >
+  <a-assets>
+    <img id="duck" src="buttons\lock view.png"  foo="src:#duck">
+    
+    <!-- <img id="duck3" src="buttons\lock view.png"  foo="src:#duck3"> -->
+    <!-- <img id="lobster" src="buttons\free roam.png" foo="src:#lobster"> -->
+  </a-assets>
+  <a-image src="#duck"  width="3" height="1.5" position="5.922 -2.766 -5.483" scale=" 1 1.100 1" foo="src:#duck" weblink="url:index2.html" ></a-image>
+
+  <!-- <a-image src="#duck3"  width="3" height="1.5" position="12.085 -2.766 -5.483" foo="src:#duck" ></a-image> -->
+  <!-- <a-image src="#lobster" id="ui"   width="3" height="1.5"  position="12.085 -2.766 -5.483" foo="src:#lobster" weblink="url:index4.html"></a-image> -->
+  
+  <a-assets timeout="30000">
+    <a-asset-item dynamic-body id="spinosaurus" src="leicatvfinal.gltf"  response-type="arraybuffer"  ></a-asset-item>
+    <a-asset-item dynamic-body id="spinosauru" src="leica_1.gltf"  response-type="arraybuffer"  ></a-asset-item>
+    
+    <!-- <img id="skyTexture" src="buttons\lock view.png">  -->
+    <!-- <img id="skyTexture1" src="buttons\free roam.png"> -->
+  </a-assets>
+  <!-- <a-image src="#skyTexture" width="3" height="1.5" position="12.085 -2.766 -5.483"></a-image> -->
+  <!-- <a-image src="#skyTexture1" width="3" height="1.5" position="12.085 -2.766 -5.483"></a-image> -->
+  
+  <!-- <a-video  src="assets\interstellar.mp4" position="-19.574 8.368 -16.630" scale="5.130 3.040 3"></a-video> -->
+    <a-entity  dynamic-body position="-19.734 0.890 -17.254" rotation="0 -85 -1" gltf-model="#spinosaurus" scale="0.05 0.05 0.05"></a-entity>
+  
+   
+  <a-entity  dynamic-body position="-1.965 2.013 -6.690" rotation="0 0 0"
+  gltf-model="#spinosauru" scale="20 20 20" modify-materials
+  material="side:back"
+  look-controls="enabled:false"
+  animation-mixer
+  shadow="cast: true; receive: false"
+  raycaster="objects: .clickable" 
+cursor="rayOrigin: mouse"></a-entity>
+  <!-- <a-entity link="href: index4.html; image: #lobster" position="12.246 -2.634 -5.417" scale="0.2 0.2 0.2" color="blue"></a-entity> -->
+  <a-sky color="blue"></a-sky>
+  <a-camera foo position="0 0 6" wasd-controls-enabled="false" look-controls="enabled:false">
+    <!-- <a-cursor></a-cursor> -->
+    <!-- <a-entity id="toggle" geometry="primitive: plane; height: 0.2; width: 0.2" position="0.3 0.7 -1" material="color: red; opacity: 0.5">
+    </a-entity> -->
+  </a-camera>
+  <!-- <a-entity id="ui" visible="false"> -->
+    <!-- <a-sphere material="side:back" radius="2"></a-sphere> -->
+    <!-- <a-cylinder material="side:back" position="1 0.75 -3" radius="0.5" height="1.5" color="red">  -->
+      <!-- <a-box position="0.5 0.5 0.3" scale="0.3 0.3 0.3" rotation="0 0 0" color="red" foo="src:#duck"></a-box> -->
+    <!-- <a-text position="1 -0.1 -0.5" color="green" value="back"></a-text> -->
+    <!-- <a-box scale="0.1 0.1 0.1" position="1 -0.2 -0.5" hide-ui color="green"></a-box> -->
+    
+  
+  <!-- </a-entity> -->
+  </a-scene>
+  <!-- <script src="https://codechangers.com/steer.js"></script> -->
+
+  </body>
+  </html>
+  

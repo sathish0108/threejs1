@@ -1,0 +1,199 @@
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script>
+</head><!--   w w   w . d   e   m  o 2   s . c  o   m -->
+
+<body>
+
+  
+<!-- <script>
+AFRAME.registerComponent("foo", {
+  init: function() {
+    let img = this.data.src
+    var targetEl = document.querySelector("a-image")
+    let UI = document.querySelector("#ui")
+    let me = document.querySelector("a-camera")
+    this.el.addEventListener("click", (e) => {
+      targetEl.setAttribute( "src", img)
+      UI.setAttribute("position", me.getAttribute("position"))
+      UI.setAttribute("visible", "true")
+      AFRAME.registerComponent('modify-materials',{   
+      schema : { speed : {default:1}},
+      init : function(){
+        this.ifMouseDown = false;
+        this.x_cord = 0;
+        // this.y_cord = 0;
+        document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
+        document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
+        document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
+      },
+      OnDocumentMouseDown : function(event){
+        this.ifMouseDown = true;
+        this.x_cord = event.clientX;
+        // this.y_cord = event.clientY;
+      },
+      OnDocumentMouseUp : function(){
+        this.ifMouseDown = true;
+      },
+      OnDocumentMouseMove : function(event)
+      {
+        if(this.ifMouseDown)
+        {
+          var temp_x = event.clientX-this.x_cord;
+          // var temp_y = event.clientY-this.y_cord;
+          if(Math.abs(temp_x))
+          {
+            this.el.object3D.rotateY(temp_x*this.data.speed/100);
+          }
+          // else
+          // {
+          //   this.el.object3D.rotateX(temp_y*this.data.speed/100);
+          // }
+          this.x_cord = event.clientX;
+          // this.y_cord = event.clientY;
+        }
+      }
+      
+    });
+    })
+  }
+})
+
+// AFRAME.registerComponent("hide-ui", {
+//   init: function() {
+//     let UI = document.querySelector("#ui")
+//     this.el.addEventListener("click", (e) => {
+//       UI.setAttribute("visible", "false")
+//     })
+//   }
+// })
+
+ 
+</script> -->
+<script>
+  AFRAME.registerComponent("weblink", {
+    schema: {
+      url: {
+        default: ""
+      }
+    },
+    init: function() {
+      this.el.addEventListener("click", (e) => {
+        window.location = this.data.url;
+      })
+    }
+  })
+ 
+</script>
+<script>
+  function kameramove_1() {
+    document.querySelector("#cam").emit("movecam_1");
+  }
+</script>
+
+<script>
+  var cameraEl = document.querySelector('#cam');
+  cameraEl.removeAttribute('wasd-controls');
+</script>
+<script>
+  function kameramove_2() {
+    document.querySelector("#cam").emit("movecam_2");
+  }
+</script>
+
+<script>
+  var cameraEl = document.querySelector('#cam');
+  cameraEl.removeAttribute('wasd-controls');
+</script>
+<script>
+  function kameramove_3() {
+    document.querySelector("#cam").emit("movecam_3");
+  }
+</script>
+
+<script>
+  var cameraEl = document.querySelector('#cam');
+  cameraEl.removeAttribute('wasd-controls');
+</script>
+<script>
+  function kameramove_4() {
+    document.querySelector("#cam").emit("movecam_4");
+  }
+</script>
+
+<script>
+  var cameraEl = document.querySelector('#cam');
+  cameraEl.removeAttribute('wasd-controls');
+</script>
+<a-scene cursor="rayOrigin: mouse">
+<a-assets>
+  <!-- <img id="duck" src="buttons\lock view.png"  foo="src:#duck"> -->
+  <img id="lobster" src="buttons\free roam.png" foo="src:#lobster">
+  <img id="duck1" src="buttons\zoom in lens.png"  foo="src:#duck1">
+    <img id="duck2" src="buttons\zoom in tv.png"  foo="src:#duck2">
+    <img id="duck3" src="buttons\fl800.png"  foo="src:#duck3">
+    <img id="duck4" src="buttons\glow800.png"  foo="src:#duck4">
+    <img id="duck5" src="buttons\zoom out lens.png"  foo="src:#duck5">
+    <img id="duck6" src="buttons\zoom out tv.png"  foo="src:#duck6">
+</a-assets>
+<!-- <a-image src="#duck"  width="3" height="1.5" position="12.085 -2.766 -5.483" foo="src:#duck"></a-image> -->
+<a-image src="#lobster" id="ui"   width="3" height="1.5"  position="5.922 -2.766 -5.483" scale=" 1 1.100 1"`foo="src:#lobster" weblink="url:index4.html"></a-image>
+
+<a-image src="#duck3"  width="3" height="1.5" position="9.990 1.198 -5.530" scale=" 0.800 1.640 0.800" foo="src:#duck3" ></a-image>
+<a-image src="#duck4"  width="3" height="1.5" position="9.990 5.198 -5.530" scale=" 0.800 1.640 0.800" foo="src:#duck4"></a-image>
+
+<!-- <a-image src="#duck1"  width="3" height="1.5" position="-0.377 -2.766 -5.483" scale=" 1 1.100 1" foo="src:#duck1"onclick="kameramove_2() "  material="opacity: 1.0; transparent: true" color="white" ></a-image>
+<a-image src="#duck2"  width="3" height="1.5" position="-6.149 -2.766 -5.483" scale=" 1 1.100 1" foo="src:#duck2"  material="opacity: 1.0; transparent: true" color="white" ></a-image>
+  <a-image src="#duck5"  width="3" height="1.5" position="2.840 -4.788 -5.483" scale=" 0.800 1.640 0.800" foo="src:#duck5" onclick="kameramove_3() "  material="opacity: 1.0; transparent: true" color="white"></a-image>
+<a-image src="#duck6"  width="3" height="1.5" position="-3.121 -4.788 -5.483" scale=" 0.800 1.640 0.800" foo="src:#duck6" onclick="kameramove_4() "  material="opacity: 1.0; transparent: true" color="white"></a-image> -->
+<a-assets timeout="30000">
+  <a-asset-item dynamic-body id="spinosaurus" src="leicatvfinal.gltf"  response-type="arraybuffer"  ></a-asset-item>
+  <a-asset-item dynamic-body id="spinosauru" src="leica_1.gltf"  response-type="arraybuffer"  ></a-asset-item>
+  <!-- <img id="skyTexture" src="buttons\lock view.png">  -->
+  <!-- <img id="skyTexture1" src="buttons\free roam.png"> -->
+</a-assets>
+<!-- <a-image src="#skyTexture" width="3" height="1.5" position="12.085 -2.766 -5.483"></a-image> -->
+<!-- <a-image src="#skyTexture1" width="3" height="1.5" position="12.085 -2.766 -5.483"></a-image> -->
+
+<a-video src="glow800(AR).mp4" position="-19.574 8.368 -16.630" scale="5.130 3.040 3"></a-video>
+  <a-entity  dynamic-body position="-19.734 0.890 -17.254" rotation="0 -85 -1"
+            gltf-model="#spinosaurus" scale="0.05 0.05 0.05"
+            ></a-entity>
+
+  <a-entity  dynamic-body position="-1.965 2.013 -6.690" rotation="0 0 0"
+  gltf-model="#spinosauru" scale="20 20 20" modify-materials
+  material="side:back"
+  look-controls="enabled:false"
+  animation-mixer
+  shadow="cast: true; receive: false"
+  raycaster="objects: .clickable" 
+cursor="rayOrigin: mouse"></a-entity>
+<!-- <a-entity link="href: index4.html; image: #lobster" position="12.246 -2.634 -5.417" scale="0.2 0.2 0.2" color="blue"></a-entity> -->
+<a-sky color="blue"></a-sky>
+<a-entity camera position="0 0 6" id="camentity" rotation="0 0 0"
+animation__4="property: position; to:  0 0 6; dur: 1500; easing: easeInOutQuad; startEvents: movecam_3; autoplay: false"
+animation__3="property: position; to: 0 0 6; dur: 1500; easing: easeInOutQuad; startEvents: movecam_4; autoplay: false"
+animation__2="property: position; to: -1.965 1 -3.52; dur: 1500; easing: easeInOutQuad; startEvents: movecam_2; autoplay: false"
+animation__1_1="property: position; to: -19.734 7 -15; dur: 1500; easing: easeInOutQuad; startEvents: movecam_1; autoplay: false">
+
+<a-camera id="cam" look-controls="enabled:false" wasd-controls-enabled="false"></a-camera>
+</a-entity>
+<!-- <a-entity id="ui" visible="false"> -->
+  <!-- <a-sphere material="side:back" radius="2"></a-sphere> -->
+  <!-- <a-cylinder material="side:back" position="1 0.75 -3" radius="0.5" height="1.5" color="red">  -->
+    <!-- <a-box position="0.5 0.5 0.3" scale="0.3 0.3 0.3" rotation="0 0 0" color="red" foo="src:#duck"></a-box> -->
+  <!-- <a-text position="1 -0.1 -0.5" color="green" value="back"></a-text> -->
+  <!-- <a-box scale="0.1 0.1 0.1" position="1 -0.2 -0.5" hide-ui color="green"></a-box> -->
+  
+
+<!-- </a-entity> -->
+</a-scene>
+<button type="button" style="position: fixed; top: 10px; left: 10px;" onclick="kameramove_1() " >zoom in tv</button>
+<button type="button" style="position: fixed; top: 10px; right: 50px;" onclick="kameramove_2() " >zoom in lens</button>
+<button type="button" style="position: fixed; top: 10px; left: 120px;" onclick="kameramove_3() " >zoom out tv</button>
+<button type="button" style="position: fixed; top: 10px; right: 180px;" onclick="kameramove_4() " >zoom out lens</button>
+</body>
+</html>
